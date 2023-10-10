@@ -1,5 +1,5 @@
 bl_info = {
-    "name": "Timelapse Add-on",
+    "name": "Blender Timelapse Tool",
     "blender": (3, 0, 0),
     "category": "Object",
 }
