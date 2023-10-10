@@ -5,13 +5,13 @@ bl_info = {
 }
 
 import bpy
-from . import timelapse_addon
+from . import timelapse
 
 def register():
-    timelapse_addon.register()
+    timelapse.register()
 
 def unregister():
-    timelapse_addon.unregister()
+    timelapse.unregister()
 
 if __name__ == "__main__":
     register()
