@@ -2,6 +2,8 @@
 
 Blender Timelapse Tool is an open-source add-on for Blender that allows you to easily create stunning timelapse videos from your 3D animations. It simplifies the process of recording and exporting timelapse sequences, giving you control over speed and output settings.
 
+Although there isn't that many features at this moment, I will continue to add new functionality based on feedback.
+
 ## Features
 
 - Record timelapse sequences directly within Blender.
@@ -10,7 +12,7 @@ Blender Timelapse Tool is an open-source add-on for Blender that allows you to e
 
 ## Installation
 
-1. Download the latest release from the [Releases](https://github.com/yourusername/yourproject/releases) page.
+1. Download the latest release from the [Releases](https://github.com/aj-phillips/Blender-Timelapse-Tool/releases) page.
 2. In Blender, go to Edit > Preferences > Add-ons.
 3. Click the "Install" button and select the downloaded add-on ZIP file.
 4. Enable the "Blender Timelapse Tool" add-on.
@@ -38,7 +40,7 @@ This project is licensed under the [GNU General Public License v3.0](LICENSE).
 
 - You are free to use, modify, and distribute this software in accordance with the terms of the GPL-3.0 license.
 - Any derivative works must also be licensed under the GPL-3.0 license.
-- For details, please refer to the [LICENSE](LICENSE) file.
+- For details, please refer to the [LICENSE](LICENSE.md) file.
 
 ## Contribution
 
@@ -46,9 +48,7 @@ Contributions are welcome! If you'd like to contribute to this project, please f
 
 ## Support and Feedback
 
-If you encounter any issues or have suggestions, please open an [issue](https://github.com/yourusername/yourproject/issues).
-
-For questions and discussions, you can also join our [community forum](https://community.forum/yourproject).
+If you encounter any issues or have suggestions, please open an [issue](https://github.com/aj-phillips/Blender-Timelapse-Tool/issues).
 
 ## Acknowledgments
 
@@ -56,4 +56,4 @@ I'd like to thank the Blender community for their support and inspiration.
 
 ---
 
-Thank you for using Blender Timelapse Tool! We hope it enhances your timelapse creation experience in Blender. Enjoy creating stunning timelapse videos!
+Thank you for using Blender Timelapse Tool! I hope it enhances your timelapse creation experience in Blender. Enjoy creating stunning timelapse videos!
