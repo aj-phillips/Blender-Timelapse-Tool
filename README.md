@@ -7,7 +7,7 @@ Although there isn't that many features at this moment, I will continue to add n
 ## Features
 
 - Record timelapse sequences directly within Blender.
-- Choose your desired timelapse speed.
+- Choose your desired timelapse speed, frame start, frame end and frame rate.
 - Export timelapse videos in popular formats.
 
 ## Installation
@@ -23,6 +23,18 @@ Although there isn't that many features at this moment, I will continue to add n
 
 - Click on "Select Output Folder" in the Timelapse Settings panel.
 - Choose the directory where you want to save your timelapse.
+
+### Set Frame Start
+
+- Adjust the "Frame Start" slider in the Timelapse Settings panel to your desired starting point of the timelapse.
+
+### Set Frame End
+
+- Adjust the "Frame End" slider in the Timelapse Settings panel to your desired finishing point of the timelapse.
+
+### Set Frame Rate
+
+- Adjust the "Frame Rate" slider in the Timelapse Settings panel.
 
 ### Set Timelapse Speed
 
@@ -55,7 +67,6 @@ Semantic Versioning (SemVer) is used for versioning in this project. This versio
 Version numbers are used as tags to mark specific releases in this repository. Each tag corresponds to a stable release of the project. Here's how the version tags work:
 
 - `vMAJOR.MINOR.PATCH`: We use version tags like `v1.0.0` to denote stable releases. These tags indicate that the project reached a stable state at that version.
-- `latest`: A `latest` tag will not be used to denote the most recent build. Instead, specific version tags will be used to ensure stability and compatibility.
 
 ### How to Use Tags
 
