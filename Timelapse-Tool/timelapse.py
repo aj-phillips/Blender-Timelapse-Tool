@@ -1,6 +1,10 @@
 import bpy
 import os
 from bpy_extras.io_utils import ExportHelper
+import threading
+
+render_thread = None
+rendering_in_progress = False
 
 bpy.types.Scene.timelapse_output_folder = bpy.props.StringProperty(
     name="Output Folder",
@@ -58,6 +62,14 @@ def start_timelapse(output_folder, frame_rate=24, frame_start=1, frame_end=90):
     bpy.ops.render.render(animation=True)
     bpy.context.scene.render.filepath = ''
 
+def start_timelapse_thread(output_folder, frame_rate=24, frame_start=1, frame_end=90):
+    global render_thread, rendering_in_progress
+
+    render_thread = threading.Thread(target=start_timelapse, args=(output_folder, frame_rate, frame_start, frame_end))
+    render_thread.start()
+
+    rendering_in_progress = True
+
 def change_speed(speed):
     original_frame_end = bpy.context.scene.frame_end
     bpy.context.scene.frame_end = int(original_frame_end / speed)
@@ -81,11 +93,21 @@ class TimelapseStartOperator(bpy.types.Operator):
     bl_label = "Start Timelapse"
 
     def execute(self, context):
+        global rendering_in_progress
+
         output_folder = context.scene.timelapse_output_folder
         timelapse_speed = context.scene.timelapse_speed
         user_frame_start = context.scene.timelapse_frame_start
         user_frame_end = context.scene.timelapse_frame_end
         user_frame_rate = context.scene.timelapse_frame_rate
+
+        if rendering_in_progress:
+            rendering_in_progress = False
+            if render_thread and render_thread.is_alive():
+                render_thread.join()
+            self.report({'INFO'}, "Timelapse rendering stopped.")
+            self.layout.operator_context = 'INVOKE_DEFAULT'
+            return {'FINISHED'}
 
         if not output_folder:
             self.report({'ERROR'}, "Please select an output folder.")
@@ -101,14 +123,12 @@ class TimelapseStartOperator(bpy.types.Operator):
 
             bpy.context.scene.frame_set(user_frame_start)
 
-            start_timelapse(output_folder, frame_rate=adjusted_frame_rate, frame_start=user_frame_start, frame_end=user_frame_end)
-            self.report({'INFO'}, "Timelapse completed successfully.")
+            start_timelapse_thread(output_folder, frame_rate=adjusted_frame_rate, frame_start=user_frame_start, frame_end=user_frame_end)
+            self.report({'INFO'}, "Timelapse rendering started in the background.")
         except Exception as e:
             self.report({'ERROR'}, f"An error occurred: {str(e)}")
 
         return {'FINISHED'}
-
-
 
 class TIMELAPSE_PT_panel(bpy.types.Panel):
     bl_label = "Timelapse Settings"
@@ -136,7 +156,10 @@ class TIMELAPSE_PT_panel(bpy.types.Panel):
         if not scene.timelapse_output_folder:
             layout.label(text="Select an output folder to enable Start Timelapse.")
         else:
-            layout.operator("timelapse.start", text="Start Timelapse")
+            if rendering_in_progress:
+                layout.operator("timelapse.start", text="Stop Timelapse")
+            else:
+                layout.operator("timelapse.start", text="Start Timelapse")
 
 
 def register():
